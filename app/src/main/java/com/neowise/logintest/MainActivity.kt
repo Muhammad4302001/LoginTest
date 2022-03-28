@@ -1,10 +1,13 @@
 package com.neowise.logintest
 
+
+import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
+import android.view.WindowManager
 import android.widget.Toast
+import com.neowise.logintest.Session.LoginPref
 import com.neowise.logintest.api.LoginService
 import com.neowise.logintest.api.RetrofitFactory
 import com.neowise.logintest.api.model.LoginRequest
@@ -19,6 +22,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var loginService: LoginService
 
+    lateinit var session: LoginPref
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -26,9 +32,29 @@ class MainActivity : AppCompatActivity() {
 
         loginService = RetrofitFactory.loginService
 
+
         val buttonLogin = binding.buttonLogin
         val editTextEmail = binding.editTextEmail
         val editTextPassword = binding.editTextPassword
+
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
+
+
+        //SharedPreferance
+
+        session = LoginPref(this)
+
+        if (session.isLoggedIn()){
+            var i: Intent = Intent(applicationContext,MainMenu::class.java)
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(i)
+            finish()
+        }
+
+
+
 
         buttonLogin.setOnClickListener {
 
@@ -55,8 +81,21 @@ class MainActivity : AppCompatActivity() {
 
                     if (res.error) {
                         Toast.makeText(this@MainActivity, "error on login: ${res.message}" , Toast.LENGTH_LONG).show()
+
                     }
                     else {
+
+                        if (telNumber.isEmpty() && password.isEmpty()){
+                            Toast.makeText(this@MainActivity,"Iltimos to'ldiring" , Toast.LENGTH_LONG).show()
+                        }
+
+                        session.saveAuthorToken(res.userToken)
+
+                        session.logginSession(telNumber,password)
+                        var i : Intent =  Intent (applicationContext, MainMenu::class.java)
+                        startActivity(i)
+                        finish()
+
                         Toast.makeText(this@MainActivity, "success login: ${res.username}" , Toast.LENGTH_LONG).show()
                     }
                 }
