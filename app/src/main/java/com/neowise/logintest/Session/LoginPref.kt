@@ -31,7 +31,7 @@ class LoginPref {
     }
 
 
-    fun logginSession(user_Phone : String, user_password : String){
+    fun creatlogginSession(user_Phone : String, user_password : String){
         editor.putBoolean(IS_LOGIN, true)
         editor.putString(KEY_PHONE, user_Phone)
         editor.putString(KEY_PASSWORD,user_password)
@@ -66,8 +66,9 @@ class LoginPref {
         return pref.getBoolean(IS_LOGIN, false)
     }
 
-    fun saveAuthorToken(author_token:String){
-        editor.putString(AUTHOR_KEY,author_token)
+    fun saveAuthToken(token: String) {
+        val editor = pref.edit()
+        editor.putString(AUTHOR_KEY, token)
         editor.apply()
     }
 

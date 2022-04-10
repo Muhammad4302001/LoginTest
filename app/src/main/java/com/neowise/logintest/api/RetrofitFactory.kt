@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitFactory {
 
     private val AUTH =
-        "Basic " + Base64.encodeToString("904302001:4302001".toByteArray(), Base64.NO_WRAP)
+        "Basic " + Base64.encodeToString("MBOS:USER".toByteArray(), Base64.NO_WRAP)
     private const val BASE_URL = "https://metan.mbos.uz/"
 
     private val okHttpClient = OkHttpClient.Builder()

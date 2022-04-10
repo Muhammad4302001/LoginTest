@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity() {
 
             val telNumber = editTextEmail.text.toString().trim()
             val password = editTextPassword.text.toString().trim()
+            val userToken_info : String
 
             if (telNumber.isEmpty()) {
                 editTextEmail.error = "Email required"
@@ -89,10 +90,16 @@ class MainActivity : AppCompatActivity() {
                             Toast.makeText(this@MainActivity,"Iltimos to'ldiring" , Toast.LENGTH_LONG).show()
                         }
 
-                        session.saveAuthorToken(res.userToken)
 
-                        session.logginSession(telNumber,password)
+
+
+
+                        session.creatlogginSession(telNumber,password)
+
+                        session.saveAuthToken(res.userToken)
+
                         var i : Intent =  Intent (applicationContext, MainMenu::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(i)
                         finish()
 

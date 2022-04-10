@@ -29,6 +29,11 @@ class MainMenu : AppCompatActivity() {
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
+        session = LoginPref(this)
+        session.checkLogin()
+
         loginService = RetrofitFactory.loginService
 
 
@@ -38,18 +43,7 @@ class MainMenu : AppCompatActivity() {
 
 
 
-
-
-        session = LoginPref(this)
-
-
-        session.checkLogin()
-
-        var user: HashMap<String, String> = session.getUserDetails()
-        var userToken = user.get(LoginPref.AUTHOR_KEY)
-
-
-        val requestInfo = UserInfoRequest("getBalance", userToken.toString())
+        val requestInfo = UserInfoRequest("getBalance","${session.fetchAuthToken()}")
 
         loginService.fetchPosts(requestInfo).enqueue(object : Callback<UserInfoModel> {
                 override fun onFailure(call: Call<UserInfoModel>, t: Throwable) {

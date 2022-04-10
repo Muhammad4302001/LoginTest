@@ -15,6 +15,18 @@ fun loggingInterceptor(): HttpLoggingInterceptor {
 
 
 
+fun authInterceptor(auth: String): (Interceptor.Chain) -> Response {
+    return { chain: Interceptor.Chain ->
+        val original = chain.request()
+        val requestBuilder = original.newBuilder()
+            .addHeader("Authorization", auth)
+            .method(original.method, original.body)
+        val request = requestBuilder.build()
+        chain.proceed(request)
+
+    }
+}
+
 class AuthInterceptor(context: Context) : Interceptor {
     private val sessionManager = LoginPref(context)
 
@@ -27,18 +39,5 @@ class AuthInterceptor(context: Context) : Interceptor {
         }
 
         return chain.proceed(requestBuilder.build())
-    }
-}
-
-
-
-fun authInterceptor(auth: String): (Interceptor.Chain) -> Response {
-    return { chain: Interceptor.Chain ->
-        val original = chain.request()
-        val requestBuilder = original.newBuilder()
-            .addHeader("Authorization", auth)
-            .method(original.method, original.body)
-        val request = requestBuilder.build()
-        chain.proceed(request)
     }
 }

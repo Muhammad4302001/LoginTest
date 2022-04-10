@@ -16,7 +16,7 @@ interface LoginService {
     fun login(@Body request: LoginRequest): Call<LoginResponse>
 
 
-    @GET("aloqa.php")
-    fun fetchPosts(requestInfo: UserInfoRequest): Call<UserInfoModel>
+    @POST("aloqa.php")
+    fun fetchPosts(@Body requestInfo: UserInfoRequest): Call<UserInfoModel>
 
 }
