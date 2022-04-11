@@ -6,49 +6,71 @@
     android:layout_height="match_parent"
     tools:context=".MainMenu">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/fl_wrapper"
-        android:layout_above="@+id/bottom_nav"/>
-
-
-    <LinearLayout
-        android:layout_marginTop="25dp"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginTop="15dp"
+        app:cardElevation="1dp"
+        android:layout_alignParentTop="true">
+
 
         <LinearLayout
-            android:layout_weight="1"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="end"
-            android:orientation="vertical"
-            android:padding="5dp">
+            android:orientation="horizontal">
 
-
-            <TextView
-                android:id="@+id/txt_bonus"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bonus:000 000 000" />
+                android:gravity="end"
+                android:orientation="vertical"
+                android:padding="5dp">
 
-            <TextView
-                android:id="@+id/txt_balance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Balance: 000 000 000" />
+
+                <TextView
+                    android:id="@+id/txt_bonus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bonus:000 000 000" />
+
+                <TextView
+                    android:id="@+id/txt_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Balance: 000 000 000" />
 
             </LinearLayout>
 
 
-        <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/ic_baseline_add_24"/>
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/ic_baseline_add_24"/>
 
-    </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fl_wrapper"
+        android:layout_above="@+id/bottom_nav">
+
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/fl_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+
+    </FrameLayout>
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
