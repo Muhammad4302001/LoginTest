@@ -56,6 +56,19 @@
         android:lineSpacingExtra="7dp"
         android:text="Don't have an Account?\nClick to Register"
         android:textAlignment="center"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:clickable="true"/>
+
+    <TextView
+        android:id="@+id/textviewForgetPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewRegister"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:lineSpacingExtra="7dp"
+        android:text="Forget password"
+        android:textAlignment="center"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
     <Button

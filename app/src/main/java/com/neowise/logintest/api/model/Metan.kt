@@ -1,14 +1,14 @@
 package com.neowise.logintest.api.model
 
 data class Metan(
-    val end_time: String,
-    val googlemap: String,
-    val id: String,
-    val image: String,
-    val name: String,
-    val open_close: Int,
-    val orientr: String,
-    val price: String,
-    val region_name: String,
-    val start_time: String
+    val name: String? = null,
+    val googlemap: String? = null,
+    val id: String? = null,
+    val end_time: String? = null,
+    val image: String? = null,
+    val open_close: Int? = null,
+    val orientr: String? = null,
+    val price: String? = null,
+    val region_name: String? = null,
+    val start_time: String? = null,
 )
